@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuizActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/descricao_jogo"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_perguntas"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
+
+    <Button
+        android:id="@+id/btnResposta"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="onRespond"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/bottao_aredondado_resposta"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        app:layout_constraintBottom_toTopOf="@+id/btnResposta3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnResposta2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="onRespond"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginStart="49dp"
+        android:background="@drawable/bottao_aredondado_resposta"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        app:layout_constraintBottom_toTopOf="@+id/btnResposta4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnResposta3" />
+
+    <Button
+        android:id="@+id/btnResposta3"
+        android:layout_width="0dp"
+        android:onClick="onRespond"
+        android:layout_height="0dp"
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginStart="49dp"
+        android:background="@drawable/bottao_aredondado_resposta"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        app:layout_constraintBottom_toTopOf="@+id/btnResposta2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnResposta" />
+
+    <Button
+        android:id="@+id/btnResposta4"
+        android:onClick="onRespond"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="46dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginStart="49dp"
+        android:background="@drawable/bottao_aredondado_resposta"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnResposta2" />
+
+    <TextView
+        android:id="@+id/textoPergunta"
+        android:layout_width="253dp"
+        android:layout_height="205dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ?"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="22dp"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="57dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnResposta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Button
+        android:id="@+id/timer"
+        android:layout_width="65dp"
+        android:layout_height="35dp"
+        android:text="15"
+        android:background="@drawable/bottao_aredondado_resposta"
+        android:clickable="false"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</android.support.constraint.ConstraintLayout>
