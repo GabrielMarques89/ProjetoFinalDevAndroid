@@ -12,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiBuilder {
-    public static String defaultBaseUrl = "http://192.168.0.16/EnadeProject.Web/";
+    public static String defaultBaseUrl = "http://192.168.1.87/EnadeProject.Web/";
 
     public static ApiPerguntas Build(String url){
 

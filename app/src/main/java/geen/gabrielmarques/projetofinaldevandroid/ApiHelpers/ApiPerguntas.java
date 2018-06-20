@@ -32,5 +32,5 @@ public interface ApiPerguntas {
             "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.79 Safari/537.36"
     })
     @POST("round/get")
-    Call<ArrayList<RoundDto>> GameGetQuestions();
+    Call<ArrayList<RoundDto>> GameGetQuestions(@Query("numeroPerguntas") long numeroPerguntas);
 }

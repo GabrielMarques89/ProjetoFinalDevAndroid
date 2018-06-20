@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +23,11 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     public ArrayList<RoundDto> rounds;
     public int fase=0;
+    public int numeroPergunta=15;
     public float pontuacao=0;
+    public Boolean jogoIniciado = false;
+    public Button BtnContinuar;
+    public Button BtnIniciar;
 
     //TODO: Salvar nas preferencias de usuário.
     public float ultimaPontuacao=0;
@@ -35,23 +41,49 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityHelper.updateActivity(this);
+        requestApiForNewRound(numeroPergunta);
         setContentView(R.layout.activity_main);
+        BtnContinuar = findViewById(R.id.btnContinuar);
+        BtnIniciar = findViewById(R.id.btnJogar);
+        BtnContinuar.setEnabled(jogoIniciado);
         Objects.requireNonNull(getSupportActionBar()).hide();
     }
 
-    public void btnJogarOnClick(View v) {
-        final AppCompatActivity mainActiv = this;
-        ApiPerguntas api = ApiBuilder.Build(ApiBuilder.defaultBaseUrl);
+    public void btnContinuarOnClick(View v) throws IOException {
+        Intent intent = new Intent(this, QuizActivity.class);
+        startActivity(intent);
+    }
 
-        Call<ArrayList<RoundDto>> call = api.GameGetQuestions();
+    public void btnJogarOnClick(View v) {
+        if(jogoIniciado == false){
+            jogoIniciado = true;
+            BtnContinuar.setEnabled(jogoIniciado);
+            BtnIniciar.setEnabled(!jogoIniciado);
+            requestApiForNewRound(numeroPergunta);
+            while (rounds == null){
+
+            }
+            btnJogarOnClick(v);
+        }
+        else{
+            if(rounds != null){
+                Intent intent = new Intent(this, QuizActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(this,"Aguarde, estamos carregando novas perguntas.",Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
+
+    public void requestApiForNewRound(int quantasPerguntas){
+        ApiPerguntas api = ApiBuilder.Build(ApiBuilder.defaultBaseUrl);
+        Call<ArrayList<RoundDto>> call = api.GameGetQuestions(quantasPerguntas);
         call.enqueue(new Callback<ArrayList<RoundDto>>() {
 
             @Override
             public void onResponse(Call<ArrayList<RoundDto>> call, Response<ArrayList<RoundDto>> response) {
                 rounds = response.body();
-
-                Intent intent = new Intent(mainActiv, QuizActivity.class);
-                startActivity(intent);
             }
 
             @Override
@@ -60,11 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 //something bad happened
             }
         });
-    }
-
-    public void btnContinuarOnClick(View v) throws IOException {
-        Intent intent = new Intent(this, QuizActivity.class);
-        startActivity(intent);
     }
 
     public void btnMelhoresPontuacoesOnClick(View v) {

@@ -28,7 +28,7 @@
         android:layout_marginTop="164dp"
         android:background="@drawable/bottao_aredondado"
         android:onClick="btnJogarOnClick"
-        android:text="Iniciar"
+        android:text="Novo jogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -42,6 +42,7 @@
         android:background="@drawable/bottao_aredondado"
         android:onClick="btnConfiguracoesOnClick"
         android:text="Configurações"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -55,6 +56,7 @@
         android:background="@drawable/bottao_aredondado"
         android:onClick="btnMelhoresPontuacoesOnClick"
         android:text="Melhores Pontuações"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />

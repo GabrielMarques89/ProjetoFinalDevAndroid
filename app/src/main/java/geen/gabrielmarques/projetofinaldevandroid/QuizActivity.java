@@ -40,8 +40,12 @@ public class QuizActivity extends AppCompatActivity {
 
         RoundDto question = parent.rounds.get(parent.fase);
         for (int j = 0; j <= question.getResposta().size() - 1; j++) {
-            map.put(buttons.get(j), question.getResposta().get(j).getCorreta());
-            buttons.get(j).setText(question.getResposta().get(j).getConteudo());
+            try {
+                map.put(buttons.get(j), question.getResposta().get(j).getCorreta());
+                buttons.get(j).setText(question.getResposta().get(j).getConteudo());
+            }catch (IndexOutOfBoundsException e){
+                //TODO: VENCER
+            }
         }
 
         TextView textoPergunta = findViewById(R.id.textoPergunta);
@@ -53,17 +57,18 @@ public class QuizActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.timer);
         button.setVisibility(View.INVISIBLE);
 
-        /*final Handler handler = new Handler();
-        final Button button = findViewById(R.id.timer);
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                timer = timer - 1;
-                button.setText(timer);
-                if(timer <= 0){
-                    ActionPerder();
-                }
+        /*new CountDownTimer(timer, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                *//*button.setText((int) (millisUntilFinished / 1000));*//*
+                button.setText("teste");
+                *//*timer = timer -1;*//*
             }
-        }, 1000);*/
+
+            public void onFinish() {
+                *//*ActionPerder();*//*
+            }
+        }.start();*/
 
 
     }
@@ -116,6 +121,11 @@ public class QuizActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
+                parent.rounds = null;
+                parent.jogoIniciado = false;
+                parent.BtnContinuar.setEnabled(parent.jogoIniciado);
+                parent.BtnIniciar.setEnabled(!parent.jogoIniciado);
+                parent.requestApiForNewRound(parent.numeroPergunta);
                 parent.FinishGame();
                 finish();
             }
