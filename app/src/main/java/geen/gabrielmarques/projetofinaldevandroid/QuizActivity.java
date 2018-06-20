@@ -26,7 +26,6 @@ public class QuizActivity extends AppCompatActivity {
     Map<Button, Boolean> map = new HashMap<Button, Boolean>();
     ArrayList<Button> buttons = new ArrayList<Button>();
     public MainActivity parent;
-    public double Pontuacao=0;
     public int timer=15;
 
     @Override
@@ -44,13 +43,24 @@ public class QuizActivity extends AppCompatActivity {
                 map.put(buttons.get(j), question.getResposta().get(j).getCorreta());
                 buttons.get(j).setText(question.getResposta().get(j).getConteudo());
             }catch (IndexOutOfBoundsException e){
-                //TODO: VENCER
+
             }
         }
 
         TextView textoPergunta = findViewById(R.id.textoPergunta);
         textoPergunta.setText(question.getPergunta().getConteudo());
-        this.Pontuacao = question.getPergunta().getDificuldade();
+    }
+
+    private void ActionVencer(){
+        final Intent telaVencer = new Intent(this, TelaVencer.class);
+        startActivity(telaVencer);
+        ReiniciarJogo();
+        /*Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                finish();
+            }
+        }, 1600);*/
     }
 
     private void runTimer(){
@@ -121,15 +131,19 @@ public class QuizActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                parent.rounds = null;
-                parent.jogoIniciado = false;
-                parent.BtnContinuar.setEnabled(parent.jogoIniciado);
-                parent.BtnIniciar.setEnabled(!parent.jogoIniciado);
-                parent.requestApiForNewRound(parent.numeroPergunta);
-                parent.FinishGame();
-                finish();
+                ReiniciarJogo();
             }
         }, 3300);
+    }
+
+    private void ReiniciarJogo(){
+        parent.rounds = null;
+        parent.jogoIniciado = false;
+        parent.BtnContinuar.setEnabled(parent.jogoIniciado);
+        parent.BtnIniciar.setEnabled(!parent.jogoIniciado);
+        parent.requestApiForNewRound(parent.numeroPergunta);
+        parent.FinishGame();
+        finish();
     }
 
     private void PassarDeFase(Button button){
@@ -142,8 +156,14 @@ public class QuizActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                finish();
-                startActivity(nextFase);
+                if(parent.fase >= parent.rounds.size()){
+                    ActionVencer();
+                    parent.jogoIniciado = false;
+                    finish();
+                }else{
+                    startActivity(nextFase);
+                    finish();
+                }
             }
         }, 3300);
     }

@@ -23,7 +23,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     public ArrayList<RoundDto> rounds;
     public int fase=0;
-    public int numeroPergunta=15;
+    public int numeroPergunta=5;
     public float pontuacao=0;
     public Boolean jogoIniciado = false;
     public Button BtnContinuar;
